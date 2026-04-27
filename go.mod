@@ -1,4 +1,4 @@
-module github.com/Promise111/goapi
+module github.com/promise111/goapi
 
 go 1.25.0
 

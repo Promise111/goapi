@@ -63,3 +63,7 @@ func (d *mockDB) GetCoinDetails(username string) *CoinDetails {
 
 	return &clientData
 }
+
+func (d *mockDB) SetupDatabase() error {
+	return nill
+}

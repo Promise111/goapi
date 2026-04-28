@@ -19,6 +19,24 @@ func Authorization(next http.Handler) http.Handler {
 		if token == "" || username == "" {
 			log.Error(UnAuthorizedError)
 			api.RequestErrorHandler(w, UnAuthorizedError)
+			return
 		}
+
+		var database *tools.DatabaseInterface
+		database, err = tools.NewDatabase()
+		if err != nil {
+			api.InternalErrorHandler(w)
+			return
+		}
+
+		var loginDetails *tools.loginDetails
+		loginDetails = (*database).GetUserLoginDetails(username)
+		if loginDetails == nil || (token != (*loginDetails).AuthToken) {
+			log.Error(UnAuthorizedError)
+			api.RequestErrorHandler(w, UnauthorizedError)
+			return
+		}
+
+		next.ServeHTTP(w, r)
 	})
 }

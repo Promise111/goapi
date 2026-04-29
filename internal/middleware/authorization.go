@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/promise111/goapi/api"
-	"github.com/prommise111/goapi/internal/tools"
+	"github.com/promise111/goapi/internal/tools"
 	log "github.com/sirupsen/logrus"
 )
 

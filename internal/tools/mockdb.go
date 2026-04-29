@@ -43,6 +43,7 @@ func (d *mockDB) GetUserLoginDetails(username string) *LoginDetails {
 
 	var clientData = LoginDetails{}
 	clientData, ok := mockLoginDetails[username]
+
 	if !ok {
 		return nil
 	}
@@ -54,8 +55,8 @@ func (d *mockDB) GetUserCoins(username string) *CoinDetails {
 	// Simulate DB call
 	time.Sleep(time.Second * 1)
 
-	var clientData CoinDetails
-	clientData, ok = mockCoinDetails[username]
+	var clientData = CoinDetails{}
+	clientData, ok := mockCoinDetails[username]
 
 	if !ok {
 		return nil

@@ -12,9 +12,10 @@ import (
 var UnAuthorizedError = errors.New("Invalid username or token.")
 
 func Authorization(next http.Handler) http.Handler {
-	return http.HandleFunc(func(w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var username string = r.URL.Query().Get("username")
 		var token string = r.Header.Get("Authorization")
+		var err error
 
 		if token == "" || username == "" {
 			log.Error(UnAuthorizedError)
@@ -29,11 +30,11 @@ func Authorization(next http.Handler) http.Handler {
 			return
 		}
 
-		var loginDetails *tools.loginDetails
+		var loginDetails *tools.LoginDetails
 		loginDetails = (*database).GetUserLoginDetails(username)
 		if loginDetails == nil || (token != (*loginDetails).AuthToken) {
 			log.Error(UnAuthorizedError)
-			api.RequestErrorHandler(w, UnauthorizedError)
+			api.RequestErrorHandler(w, UnAuthorizedError)
 			return
 		}
 

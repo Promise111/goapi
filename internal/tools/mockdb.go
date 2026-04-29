@@ -65,5 +65,5 @@ func (d *mockDB) GetUserCoins(username string) *CoinDetails {
 }
 
 func (d *mockDB) SetupDatabase() error {
-	return nill
+	return nil
 }

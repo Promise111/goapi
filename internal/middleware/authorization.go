@@ -3,6 +3,7 @@ package middleware
 import (
 	"errors"
 	"net/http"
+	str "strings"
 
 	"github.com/promise111/goapi/api"
 	"github.com/promise111/goapi/internal/tools"
@@ -14,8 +15,10 @@ var UnAuthorizedError = errors.New("Invalid username or token.")
 func Authorization(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var username string = r.URL.Query().Get("username")
-		var token string = r.Header.Get("Authorization")
+		var auth string = r.Header.Get("Authorization")
+		var token string = str.Split(auth, " ")[1]
 		var err error
+		log.Info("Authorization middleware called: username=", username, " token=", token)
 
 		if token == "" || username == "" {
 			log.Error(UnAuthorizedError)

@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github/com/promise111/gopi/api"
-
 	"github.com/gorilla/schema"
 	"github.com/promise111/goapi/api"
 	"github.com/promise111/goapi/internal/tools"
